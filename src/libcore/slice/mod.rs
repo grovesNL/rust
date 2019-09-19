@@ -3187,12 +3187,13 @@ macro_rules! iterator {
                 // manual unrolling is needed when there are conditional exits from the loop
                 let mut accum = init;
                 unsafe {
-                    while len!(self) >= 4 {
-                        accum = f(accum, next_unchecked!(self))?;
-                        accum = f(accum, next_unchecked!(self))?;
-                        accum = f(accum, next_unchecked!(self))?;
-                        accum = f(accum, next_unchecked!(self))?;
-                    }
+                    // REMOVED AS AN EXPERIMENT; DO NOT MERGE
+                    // while len!(self) >= 4 {
+                    //     accum = f(accum, next_unchecked!(self))?;
+                    //     accum = f(accum, next_unchecked!(self))?;
+                    //     accum = f(accum, next_unchecked!(self))?;
+                    //     accum = f(accum, next_unchecked!(self))?;
+                    // }
                     while !is_empty!(self) {
                         accum = f(accum, next_unchecked!(self))?;
                     }
